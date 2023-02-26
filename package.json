@@ -1,0 +1,28 @@
+{
+  "name": "lit-playground",
+  "private": true,
+  "version": "0.0.0",
+  "main": "dist/my-element.es.js",
+  "exports": {
+    ".": "./dist/my-element.es.js"
+  },
+  "types": "types/my-element.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "xoxo": "tsc ./src/test.ts --module es2020;  node ./src/test.js",
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "dependencies": {
+    "lit": "^2.6.1"
+  },
+  "devDependencies": {
+    "ts-simple-ast": "^21.0.4",
+    "tsconfig-paths": "^3.14.2",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
+}
