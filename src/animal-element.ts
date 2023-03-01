@@ -1,8 +1,9 @@
-import { LitElement, html } from "lit";
+import { html } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
+import { OrganismElement } from "./organism-element";
 
 @customElement("animal-element")
-export class AnimalElement extends LitElement {
+export class AnimalElement extends OrganismElement {
   private fireAnimalFunc() {
     return "hello";
   }
