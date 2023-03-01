@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
+# keep to show Kevin debugger ...   .vscode/*
 !.vscode/extensions.json
 .idea
 .DS_Store
