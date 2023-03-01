@@ -1,9 +1,11 @@
 // import { LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Menu } from "../types/mwc-menu";
+import { MdIcon } from "./icon";
+// doesn't work @ since missing definitions (?) - import { Menu } from "@material/mwc-menu";
 
 @customElement("organism-element")
-export class OrganismElement extends Menu {
+export class OrganismElement extends MdIcon {
+
   constructor() {
     super();
   }
