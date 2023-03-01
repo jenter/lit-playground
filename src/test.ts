@@ -1,5 +1,10 @@
 import * as ts from "typescript";
+// import * as utils from "tsutils";
+import * as fs from "fs";
+import * as LitAnalyzer from "lit-analyzer";
+// import * as getDeclaration from "lit-analyzer/lib/lit-analyzer-utils";
 
+// example final inherited class ..
 const file = "./src/dog-element.ts";
 
 const program = ts.createProgram([file], {
@@ -53,8 +58,6 @@ const myTargettedClass = classDeclaration?.name as ts.Identifier;
 
 // ////////////////////////////////////////////////////////////////////
 
-// [ ] ... I can know print out all the member info in a universal way with the appropriate properties :)
-
 if (!isHeritageClause || !programLength) {
   throw new Error("missing heritage clause or program length");
 }
@@ -87,7 +90,85 @@ const getSuperContructor = (availableMembers: any) => {
   return getConstructor;
 };
 
+const classAvailableMemberNodes = (availableMembers: ts.NodeArray<ts.Node>) => {
+  return availableMembers
+    .filter((member: ts.Node) =>
+      // filter as property declaration or method declaration
+      Boolean(
+        ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member)
+      )
+    )
+    .filter((member: ts.Node) => {
+      // filter out native names like render, connectedCallback, etc.
+      if (ts.isPropertyDeclaration(member)) return true;
+      const memberNode = member as ts.MethodDeclaration;
+      const methodName = memberNode?.name?.getText() as string;
+      return Boolean(methodName && methodName !== "render");
+    });
+};
+
 const currentClassMembers = classDeclaration.members as ts.NodeArray<ts.Node>;
+const currentNodesToPrint = classAvailableMemberNodes(currentClassMembers);
+
+const constuctJsonFromMembers = (availableNodes: any) => {
+  console.log(availableNodes);
+
+  const buildJsonRefs = availableNodes.map((node: any) => {
+    const nodeKind = ts.SyntaxKind[node.kind];
+    const nodeText = node.getText();
+    const name: string = node.name.getText() as string;
+    const getInitializerForDefuault =
+      node?.initializer?.getText() ?? "undefined";
+
+    const availableModifiers: any = [];
+
+    // unused but marking for now for future reference.
+    const nodeFullText = node.getFullText();
+    const getTypeAtLocation = program.getTypeChecker().getTypeAtLocation(node);
+    const getSymbol = (getTypeAtLocation?.symbol as ts.Symbol) ?? undefined;
+    const getSymbolsValueDeclaration =
+      (getSymbol?.valueDeclaration as ts.PropertyDeclaration) ?? undefined;
+    //////
+
+    if (
+      ts.isPropertyDeclaration(node) &&
+      (node?.modifiers as ts.NodeArray<ts.Node>)
+    ) {
+      // TODO: obviously need to find a better way to get the decorator node.
+      const modifierProperties = node?.modifiers as any;
+      if (!modifierProperties) return;
+      const expressionOnNode = modifierProperties.find((property: any) =>
+        ts.isDecorator(property)
+      );
+      if (!expressionOnNode) return;
+
+      const propertiesOfExpression =
+        expressionOnNode?.expression?.arguments[0]?.properties ?? false;
+
+      const createMapOfModifiers = propertiesOfExpression.map(
+        (property: any) => {
+          const propertyName = property.name.getText();
+          const propertyValue = property.initializer.getText();
+          return { [propertyName]: propertyValue };
+        }
+      );
+
+      if (createMapOfModifiers.length) {
+        availableModifiers.push(...createMapOfModifiers);
+      }
+    }
+
+    return {
+      name,
+      nodeKind,
+      nodeText,
+      default: getInitializerForDefuault,
+      modifiers: availableModifiers ?? undefined,
+    };
+  });
+
+  return buildJsonRefs;
+};
 
 const superMemberNodeReference = getSuperContructor(currentClassMembers);
 
@@ -96,17 +177,22 @@ const appropriateMembersAsNodes = currentClassMembers.filter(
     Boolean(ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member))
 );
 
-const aaaTestingAmeMber =
-  appropriateMembersAsNodes[0] as ts.PropertyDeclaration;
+const testingCurrentClassJSON = constuctJsonFromMembers(currentNodesToPrint);
+const jsonString = JSON.stringify(testingCurrentClassJSON, null, 2);
 
-const aaaTestingAmeMberFullPrint = aaaTestingAmeMber.getFullText();
+// Write the string to a file
+fs.writeFileSync("src/test/currentClass.json", jsonString, {
+  encoding: "utf8",
+});
 
-console.log("🚀 >  ", aaaTestingAmeMberFullPrint);
+console.log("🚀 completed JSON from current class");
 
-console.log("🚀 THIS IS SYNTAX KIND >  ", ts.SyntaxKind[myTargettedClass.kind]);
-console.log("🚀 hello :", superMemberNodeReference);
+// console.log("🚀 THIS IS SYNTAX KIND >  ", ts.SyntaxKind[myTargettedClass.kind]);
+// console.log("🚀 hello :", superMemberNodeReference);
 
-// Heritage Types //////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+// Heritage Class info /////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
 // @ts-ignore
 const heritageClassTypes = heritageClause?.types;

@@ -11,15 +11,18 @@ export class DogElement extends AnimalElement {
     super();
   }
 
-  private fireDogFunc() {
-    return "howdy";
-  }
-
   /**
    * dogHead...
    */
-  @property({ attribute: "dog-head" })
-  dogHead: String = "";
+  @property({ attribute: "dog-head", reflect: true })
+  dogHead: String = "xooxox";
+
+  /**
+   * fireDogFunc.......
+   */
+  private fireDogFunc() {
+    return "howdy";
+  }
 
   render() {
     const { animalHead, dogHead } = this;
