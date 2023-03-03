@@ -111,7 +111,7 @@ const isHeritageClause = heritageClause && ts.isHeritageClause(heritageClause);
 const checker = program.getTypeChecker();
 
 // ////////////////////////////////////////////////////////////////////
-
+// JUST SHOWING YOU GENERAL BREAKPOINTS AND THOUGHTS 
 const classAvailableMemberNodes = (availableMembers: ts.NodeArray<ts.Node>) => {
   return availableMembers
     .filter((member: ts.Node) =>
@@ -201,7 +201,16 @@ fs.writeFileSync("src/test/currentClass.json", jsonString, {
   encoding: "utf8",
 });
 
-console.log("🚀 completed JSON from current class 🚀");
+/**
+ * Kevin question on this breakpoint:
+ * this is just targetting the current class, do we even need this for comparison if the proceeding has all the things?
+ * ... maybe so, but have a look
+ *
+ * constuctJsonFromMembers is really messy, and I will clean up it, but let me know what other information could be useful.
+ *
+ */
+
+console.log("🚀 completed JSON from just current class: dog-element.ts 🚀");
 
 ////////////////////////////////////////////////////////////////////////
 // Heritage Class info /////////////////////////////////////////////////
@@ -278,6 +287,14 @@ const HeritageClauseMapping = constructHeritageMapping(
   heritageClauseProperties
 );
 
+/**
+ * Kevin question on this breakpoint:
+ * How do you feel about us using looping thru the *.ds.ts files just for now, or would we be missing anything useful?
+ *
+ * HeritageClauseMapping has some initial values, but let me know what other information could be useful.
+ *
+ */
+
 const jsonStringHeritage = JSON.stringify(HeritageClauseMapping, null, 2);
 
 // Write the string to a file
@@ -285,4 +302,4 @@ fs.writeFileSync("src/test/heritageClass.json", jsonStringHeritage, {
   encoding: "utf8",
 });
 
-console.log("🚀 completed JSON from Heritage class 🚀");
+console.log("🚀 completed JSON from Heritage class of all the things 🚀");
