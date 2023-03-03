@@ -4,9 +4,6 @@ import { AnimalElement } from "./animal-element";
 
 @customElement("dog-element")
 export class DogElement extends AnimalElement {
-  /**
-   * super
-   */
   constructor() {
     super();
   }

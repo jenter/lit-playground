@@ -4,6 +4,10 @@ import { OrganismElement } from "./organism-element";
 
 @customElement("animal-element")
 export class AnimalElement extends OrganismElement {
+  constructor() {
+    super();
+  }
+
   private fireAnimalFunc() {
     return "hello";
   }

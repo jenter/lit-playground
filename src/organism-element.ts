@@ -1,13 +1,18 @@
 // import { LitElement } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { MdIcon } from "./icon";
-// doesn't work @ since missing definitions (?) - import { Menu } from "@material/mwc-menu";
+import { Menu } from "@material/mwc-menu";
 
 @customElement("organism-element")
-export class OrganismElement extends MdIcon {
-
+export class OrganismElement extends Menu {
   constructor() {
     super();
+  }
+
+  /**
+   * fireOrganismFunc.......
+   */
+  private fireOrganismFunc() {
+    return "howdy";
   }
 
   /**
