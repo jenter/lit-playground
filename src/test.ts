@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 // import * as utils from "tsutils";
 import * as fs from "fs";
-import * as LitAnalyzer from "lit-analyzer";
+// import * as LitAnalyzer from "lit-analyzer";
 // import * as getDeclaration from "lit-analyzer/lib/lit-analyzer-utils";
 
 // example final inherited class ..
@@ -22,21 +22,9 @@ if (!classDeclaration) {
 }
 
 // ////////////////////////////////////////////////////////////////////
+// unused references for later, probably throwaway
 
-let heritageClause: ts.HeritageClause | undefined = undefined;
-
-ts.forEachChild(classDeclaration, (node) => {
-  if (
-    ts.isHeritageClause(node) &&
-    node.token === ts.SyntaxKind.ExtendsKeyword
-  ) {
-    heritageClause = node as ts.HeritageClause;
-  }
-});
-
-const programLength = Boolean(program.getSemanticDiagnostics().length);
-const isHeritageClause = heritageClause && ts.isHeritageClause(heritageClause);
-const checker = program.getTypeChecker();
+/*
 
 const constructorTest = classDeclaration.members.find((member) =>
   ts.isConstructorDeclaration(member)
@@ -56,16 +44,7 @@ const isExpressionASuper = Boolean(
 
 const myTargettedClass = classDeclaration?.name as ts.Identifier;
 
-// ////////////////////////////////////////////////////////////////////
-
-if (!isHeritageClause || !programLength) {
-  throw new Error("missing heritage clause or program length");
-}
-
-const baseType = program.getTypeChecker().getTypeAtLocation(superExpression);
-
 const getSuperContructor = (availableMembers: any) => {
-  //
   const getConstructor = availableMembers.find((member: any) =>
     ts.isConstructorDeclaration(member)
   ) as ts.ConstructorDeclaration;
@@ -86,9 +65,52 @@ const getSuperContructor = (availableMembers: any) => {
     throw new Error("missing super expression as super() called.");
   }
 
-  // return node for filtering and reference later.
   return getConstructor;
 };
+
+const baseType = program.getTypeChecker().getTypeAtLocation(superExpression);
+
+const checkFlags = ts.getCombinedModifierFlags(property?.declarations[0]);
+
+if (checkFlags !== 0) {
+  const isPublic = (checkFlags & ts.ModifierFlags.Public) !== 0;
+
+  // Check if the node is private
+  const isPrivate = (checkFlags & ts.ModifierFlags.Private) !== 0;
+
+  // Check if the node is protected
+  const isProtected = (checkFlags & ts.ModifierFlags.Protected) !== 0;
+
+  // Check if the node is static
+  const isStatic = (checkFlags & ts.ModifierFlags.Static) !== 0;
+
+  // Check if the node is async
+  const isAsync = (checkFlags & ts.ModifierFlags.Async) !== 0;
+
+  // Check if the node is readonly
+  const isReadonly = (checkFlags & ts.ModifierFlags.Readonly) !== 0;
+}
+
+*/
+
+// ////////////////////////////////////////////////////////////////////
+
+let heritageClause: ts.HeritageClause | undefined = undefined;
+
+ts.forEachChild(classDeclaration, (node) => {
+  if (
+    ts.isHeritageClause(node) &&
+    node.token === ts.SyntaxKind.ExtendsKeyword
+  ) {
+    heritageClause = node as ts.HeritageClause;
+  }
+});
+
+const programLength = Boolean(program.getSemanticDiagnostics().length);
+const isHeritageClause = heritageClause && ts.isHeritageClause(heritageClause);
+const checker = program.getTypeChecker();
+
+// ////////////////////////////////////////////////////////////////////
 
 const classAvailableMemberNodes = (availableMembers: ts.NodeArray<ts.Node>) => {
   return availableMembers
@@ -109,10 +131,12 @@ const classAvailableMemberNodes = (availableMembers: ts.NodeArray<ts.Node>) => {
 
 const currentClassMembers = classDeclaration.members as ts.NodeArray<ts.Node>;
 const currentNodesToPrint = classAvailableMemberNodes(currentClassMembers);
+const appropriateMembersAsNodes = currentClassMembers.filter(
+  (member: ts.Node) =>
+    Boolean(ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member))
+);
 
 const constuctJsonFromMembers = (availableNodes: any) => {
-  console.log(availableNodes);
-
   const buildJsonRefs = availableNodes.map((node: any) => {
     const nodeKind = ts.SyntaxKind[node.kind];
     const nodeText = node.getText();
@@ -128,7 +152,6 @@ const constuctJsonFromMembers = (availableNodes: any) => {
     const getSymbol = (getTypeAtLocation?.symbol as ts.Symbol) ?? undefined;
     const getSymbolsValueDeclaration =
       (getSymbol?.valueDeclaration as ts.PropertyDeclaration) ?? undefined;
-    //////
 
     if (
       ts.isPropertyDeclaration(node) &&
@@ -170,13 +193,6 @@ const constuctJsonFromMembers = (availableNodes: any) => {
   return buildJsonRefs;
 };
 
-const superMemberNodeReference = getSuperContructor(currentClassMembers);
-
-const appropriateMembersAsNodes = currentClassMembers.filter(
-  (member: ts.Node) =>
-    Boolean(ts.isPropertyDeclaration(member) || ts.isMethodDeclaration(member))
-);
-
 const testingCurrentClassJSON = constuctJsonFromMembers(currentNodesToPrint);
 const jsonString = JSON.stringify(testingCurrentClassJSON, null, 2);
 
@@ -185,188 +201,88 @@ fs.writeFileSync("src/test/currentClass.json", jsonString, {
   encoding: "utf8",
 });
 
-console.log("🚀 completed JSON from current class");
-
-// console.log("🚀 THIS IS SYNTAX KIND >  ", ts.SyntaxKind[myTargettedClass.kind]);
-// console.log("🚀 hello :", superMemberNodeReference);
+console.log("🚀 completed JSON from current class 🚀");
 
 ////////////////////////////////////////////////////////////////////////
 // Heritage Class info /////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
-// @ts-ignore
+if (!isHeritageClause || !programLength) {
+  throw new Error("missing heritage clause or program length");
+}
+
 const heritageClassTypes = heritageClause?.types;
 
-heritageClassTypes.forEach((type: Object) => {
-  // @ts-ignore
-  const getTypeFromTypeNode = checker.getTypeFromTypeNode(type);
+const getTypeOfHeritageAtLocation = checker.getTypeAtLocation(
+  heritageClassTypes[0]
+);
+const getPropertiesOfTypeHeritage = checker.getPropertiesOfType(
+  getTypeOfHeritageAtLocation
+);
 
-  const members = getTypeFromTypeNode.getProperties();
+const heritageClauseProperties = getPropertiesOfTypeHeritage
+  .filter((property) => {
+    const declarations = property.getDeclarations();
+    if (!declarations?.length) return false;
 
-  members.forEach((property) => {
-    const currentProperty: ts.Symbol = property as ts.Symbol;
+    const declarationInformation = declarations[0];
 
-    const getName: string = currentProperty.getName() as string;
+    const getSourceFile = declarationInformation.getSourceFile();
+    const getSourceFileName = getSourceFile.fileName;
 
-    const getPropertyDeclaration = currentProperty?.getDeclarations();
-    const getPropertyValueDeclaration =
-      currentProperty?.valueDeclaration as ts.PropertyDeclaration;
+    const validatePropertyOrMethod = Boolean(
+      ts.isPropertyDeclaration(declarationInformation) ||
+        ts.isMethodDeclaration(declarationInformation)
+    );
 
-    /**
-     * I still need a way to get current property from current class
-     */
-    if (
-      getName == "dogHead" ||
-      getName == "isOpen" ||
-      getName == "toggle" ||
-      getName == "animalHead" ||
-      getName == "animalToes" ||
-      getName == "dogHead"
-    ) {
-      const type = program
-        .getTypeChecker()
-        .getTypeAtLocation(getPropertyValueDeclaration);
+    if (!validatePropertyOrMethod) return false;
+    // if (!property?.parent) return false;
 
-      if (
-        getPropertyValueDeclaration.initializer &&
-        ts.isStringLiteral(getPropertyValueDeclaration.initializer)
-      ) {
-        console.log(
-          `Default value: ${getPropertyValueDeclaration.initializer.text}`
-        );
-      }
-      // I can get default value like this ^
-
-      const isDeclaredInThisClass =
-        type.symbol &&
-        type.symbol.valueDeclaration === getPropertyValueDeclaration;
-      const message = isDeclaredInThisClass
-        ? "Declared in this class"
-        : "Inherited from superclass";
-      console.log(`Property ${getName} - ${message}`);
-
-      const getNodeFromSymbol = currentProperty?.declarations;
-      // console.log("🚀 ~ bol:", getNodeFromSymbol?.getText());
-      // const valueDeclaration = currentProperty?.valueDeclaration?.getText();
-
-      console.log(
-        "🚀 THIS IS SYNTAX KIND: ",
-        ts.SyntaxKind[getNodeFromSymbol[0].kind]
-      );
-
-      // MethodDeclaration + PropertyDeclaration
-    }
-
-    console.log(
-      "🚀 ~ file: test.ts:127 ~ getMembers.forEach ~ getName:",
-      getName
+    return true;
+  })
+  .map((property) => {
+    const declarations = property.getDeclarations();
+    return (
+      declarations &&
+      (declarations.find((declaration) => {
+        return declaration;
+      }) as ts.PropertyDeclaration)
     );
   });
+
+const constructHeritageMapping = (availableNodes: any) => {
+  const buildJsonRefs = availableNodes.map((node: any) => {
+    const nodeKind = ts.SyntaxKind[node.kind];
+    const nodeText = node.getText();
+    const name: string = node.name.getText() as string;
+
+    const getSourceFile = node.getSourceFile();
+    const getSourceFileName = getSourceFile.fileName;
+    const isDeclarationFile = getSourceFile.isDeclarationFile;
+
+    // console.log("🚀 getSourceFileName: ", getSourceFileName);
+
+    return {
+      name,
+      nodeKind,
+      nodeText,
+      getSourceFileName,
+      isDeclarationFile,
+    };
+  });
+
+  return buildJsonRefs;
+};
+
+const HeritageClauseMapping = constructHeritageMapping(
+  heritageClauseProperties
+);
+
+const jsonStringHeritage = JSON.stringify(HeritageClauseMapping, null, 2);
+
+// Write the string to a file
+fs.writeFileSync("src/test/heritageClass.json", jsonStringHeritage, {
+  encoding: "utf8",
 });
 
-// const properties = Array.from(members.values());
-// properties.forEach((property) => {
-//   const currentProperty: ts.Symbol = property as ts.Symbol;
-
-//   const getName: string = currentProperty.getName() as string;
-
-//   const valueDeclaration = currentProperty?.valueDeclaration?.getText();
-//   // console.log('🚀 -- valueDeclaration Text -- 🚀 ', valueDeclaration);
-
-//   if (getName == 'animalHead' || getName == 'animalToes' || getName == 'dogHead') {
-
-//     const declaration = currentProperty?.getDeclarations();
-
-//     const symbol = program.getTypeChecker().getSymbolAtLocation(currentProperty);
-
-//     // const type = program.getTypeChecker().getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration);
-
-//     // console.log(`Property name: ${symbol.name}`);
-
-//     // if (type && type.isStringLiteral()) {
-//     //   console.log(`Default value: ${type.value}`);
-//     // }
-
-//     // if (symbol.getDocumentationComment()) {
-//     //   console.log(`Documentation: ${symbol.getDocumentationComment()}`);
-//     // }
-
-//     const getTypeOfSymbolAtLocation = program.getTypeChecker().getTypeOfSymbolAtLocation(symbol, symbol.valueDeclaration);
-
-//     console.log('🚀 symbol:', symbol);
-//   }
-
-// });
-
-// let figureoutThis = '';
-
-// const constructor = two[0];
-
-// const isLitElement = heritageClause?.types?.some(
-//   (type) =>
-//     ts.isIdentifier(type.expression) &&
-//     type.expression.getText() === 'LitElement'
-// );
-
-// console.log('🚀 ~ file: test.ts:79 ~ isLitElement:', isLitElement);
-
-// constructor?.body?.statements.forEach((statement) => {
-
-//   const checkstatement = statement as ts.ExpressionStatement;
-//   const thisisTrue = ts.isExpressionStatement(statement);
-
-//   if (ts.isExpressionStatement(statement)) {
-//     const expression = statement.expression;
-//     const isAnother = ts.isCallExpression(expression)
-
-//     const checkSuper = ts.isAsExpression(expression);
-
-//     console.log('🚀 ~ getText :', expression.getText());
-
-//     if (
-//       ts.isCallExpression(expression)
-//     ) {
-//       // Access the arguments of the super() call
-//       const expressionArguments = expression.arguments;
-//       const getLengthOf = expressionArguments.length;
-
-//       // const letArg = expression;
-
-//       console.log('xxx', expressionArguments);
-//       console.log('getLengthOf', getLengthOf);
-
-//       expressionArguments.forEach((arg) => {
-
-//         // console.log(`Kind: ${arg.kind}`);
-//         // console.log(`Text: ${arg.getText()}`);
-//         // console.log(`Type: ${program.getTypeChecker().getTypeAtLocation(arg)}`);
-
-//         const getKind = arg.kind;
-//         const getText = arg.getText();
-
-//         console.log(getText, getKind);
-//       });
-//     }
-//   }
-// });
-
-//   if (typeof heritageClassTypes == 'object') {
-//     heritageClassTypes.forEach((type: Object) => {
-//       const getTypeFromTypeNode = checker.getTypeFromTypeNode(type);
-//       const getMembers = getTypeFromTypeNode?.members;
-//       const properties = Array.from(getMembers.values());
-
-//       properties.forEach((property) => {
-//         const currentProperty: ts.Symbol = property as ts.Symbol;
-
-//         const getName: string = currentProperty.getName() as string;
-
-//         const valueDeclaration = currentProperty?.valueDeclaration?.getText();
-//         // console.log('🚀 -- valueDeclaration Text -- 🚀 ', valueDeclaration);
-
-//         // console.log('🚀 currentProperty:', currentProperty);
-//       });
-//     });
-//   }
-// } else {
-//   console.error('No heritageClause found ');
+console.log("🚀 completed JSON from Heritage class 🚀");
