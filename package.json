@@ -12,6 +12,7 @@
     "types"
   ],
   "scripts": {
+    "wca-analyze": "custom-elements-manifest analyze --config './wca-analyzer.config.mjs' --litelement",
     "xoxo": "tsc ./src/test.ts --module es2020;  node ./src/test.js",
     "dev": "vite",
     "build": "tsc && vite build"
@@ -20,9 +21,18 @@
     "lit": "^2.6.1"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.6.8",
+    "@custom-elements-manifest/find-dependencies": "^0.0.5",
+    "@custom-elements-manifest/to-markdown": "^0.1.0",
+    "@material/mwc-menu": "^0.27.0",
+    "custom-elements-manifest": "^2.0.0",
+    "fs": "^0.0.1-security",
+    "lit-analyzer": "^1.2.1",
     "ts-simple-ast": "^21.0.4",
     "tsconfig-paths": "^3.14.2",
+    "tsutils": "^3.21.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
-  }
+  },
+  "customElements": "custom-elements.json"
 }
