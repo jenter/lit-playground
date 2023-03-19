@@ -1,1 +1,23 @@
-// empty
+[
+  {
+    "name": "dogHead",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@property({ attribute: \"dog-head\", reflect: true })\n  dogHead: String = \"xooxox\";",
+    "default": "\"xooxox\"",
+    "modifiers": [
+      {
+        "attribute": "\"dog-head\""
+      },
+      {
+        "reflect": "true"
+      }
+    ]
+  },
+  {
+    "name": "fireDogFunc",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "private fireDogFunc() {\n    return \"howdy\";\n  }",
+    "default": "undefined",
+    "modifiers": []
+  }
+]

@@ -220,6 +220,8 @@ const getPropertiesOfTypeHeritage = checker.getPropertiesOfType(
   getTypeOfHeritageAtLocation
 );
 
+const excludedModifiers = ["private", "protected", "static", "readonly"];
+
 const heritageClauseProperties = getPropertiesOfTypeHeritage
   .filter((property) => {
     const declarations = property.getDeclarations();
@@ -229,14 +231,39 @@ const heritageClauseProperties = getPropertiesOfTypeHeritage
 
     const getSourceFile = declarationInformation.getSourceFile();
     const getSourceFileName = getSourceFile.fileName;
+    const isDeclarationFile = getSourceFile?.isDeclarationFile;
 
     const validatePropertyOrMethod = Boolean(
       ts.isPropertyDeclaration(declarationInformation) ||
-        ts.isMethodDeclaration(declarationInformation)
+      ts.isMethodDeclaration(declarationInformation)
     );
 
     if (!validatePropertyOrMethod) return false;
-    // if (!property?.parent) return false;
+
+    // skip for native LIT declarations
+    if (isDeclarationFile) {
+      const isLitDeclaration = Boolean(getSourceFileName.includes('node_modules') && (getSourceFileName.includes('@lit') || getSourceFileName.includes('lit-element')));
+      if (isLitDeclaration) return false;
+    }
+
+    const modifiers = ts.canHaveModifiers(declarationInformation) ? ts.getModifiers(declarationInformation) : undefined;
+
+    if (!modifiers) return true;
+
+    const textValuesIdentifiers = modifiers.map((modifier) => {
+      return modifier.getText();
+    });
+
+    const skipDueToModifier = textValuesIdentifiers.some((textValue) => {
+      return excludedModifiers.includes(textValue);
+    });
+
+    if (skipDueToModifier) return false;
+
+    // const testingName = property?.name;
+    // if (testingName == "aadifferentpropstyles" || testingName == "animalHead" || testingName == 'fireAnimalFunc' || testingName == "_listUpdateComplete" || testingName == "__childPart" || testingName == "mdcFoundationClass" || testingName == "renderOptions") {
+    //   console.log('e');
+    // }
 
     return true;
   })
@@ -259,8 +286,6 @@ const constructHeritageMapping = (availableNodes: any) => {
     const getSourceFile = node.getSourceFile();
     const getSourceFileName = getSourceFile.fileName;
     const isDeclarationFile = getSourceFile.isDeclarationFile;
-
-    // console.log("🚀 getSourceFileName: ", getSourceFileName);
 
     return {
       name,

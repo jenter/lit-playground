@@ -1,1 +1,233 @@
-// empty
+[
+  {
+    "name": "animalHead",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@property({ attribute: \"animal-head\" })\n  animalHead: String = \"\";",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "animalToes",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@property({ attribute: \"animal-toes\" })\n  animalToes: String = \"asdfasdfasdf\";",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "aadifferentpropstyles",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@property()\n  aadifferentpropstyles?: string = '';",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "isOpen",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@state()\n  isOpen = false;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "render",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "render() {\n    const { animalHead } = this;\n\n    return html`\n      <div>\n        <div>animalhead: ${animalHead}</div>\n        animal render\n      </div>\n    `;\n  }",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "organismEar",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "@property({ attribute: \"organism-ear\" })\n  organismEar: String = \"\";",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/organism-element.ts",
+    "isDeclarationFile": false
+  },
+  {
+    "name": "mdcRoot",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "mdcRoot: MenuSurface;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "slotElement",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "slotElement: HTMLSlotElement | null;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "anchor",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "anchor: HTMLElement | null;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "open",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "open: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "quick",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "quick: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "wrapFocus",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "wrapFocus: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "innerRole",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "innerRole: 'menu' | 'listbox';",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "innerAriaLabel",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "innerAriaLabel: string | null;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "corner",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "corner: Corner;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "x",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "x: number | null;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "y",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "y: number | null;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "absolute",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "absolute: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "multi",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "multi: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "activatable",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "activatable: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "fixed",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "fixed: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "forceGroupSelection",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "forceGroupSelection: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "fullwidth",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "fullwidth: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "menuCorner",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "menuCorner: MenuCorner;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "stayOpenOnBodyClick",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "stayOpenOnBodyClick: boolean;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "defaultFocus",
+    "nodeKind": "PropertyDeclaration",
+    "nodeText": "defaultFocus: DefaultFocusState;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "select",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "select(index: MWCListIndex): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "close",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "close(): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "show",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "show(): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "getFocusedItemIndex",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "getFocusedItemIndex(): number;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "focusItemAtIndex",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "focusItemAtIndex(index: number): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "layout",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "layout(updateItems?: boolean): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "click",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "click(): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-base/base-element.d.ts",
+    "isDeclarationFile": true
+  }
+]

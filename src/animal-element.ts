@@ -21,6 +21,10 @@ export class AnimalElement extends OrganismElement {
   @property({ attribute: "animal-toes" })
   animalToes: String = "asdfasdfasdf";
 
+  @property()
+  aadifferentpropstyles?: string = '';
+
+
   @state()
   isOpen = false;
 
