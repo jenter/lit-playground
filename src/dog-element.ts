@@ -23,6 +23,7 @@ export class DogElement extends AnimalElement {
 
   render() {
     const { animalHead, dogHead } = this;
+    console.log('🚀 ~ this:', this, this.corner);
 
     return html`
       <div>

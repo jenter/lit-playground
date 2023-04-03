@@ -1,14 +1,16 @@
-import { defineConfig } from 'vite'
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
+
 export default defineConfig({
   build: {
     lib: {
-      entry: 'src/my-element.ts',
-      formats: ['es'],
-    },
-    rollupOptions: {
-      external: /^lit/,
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'test',
+      fileName: 'test',
     },
   },
+  plugins: [dts()],
 })

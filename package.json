@@ -1,7 +1,7 @@
 {
   "name": "lit-playground",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/my-element.es.js",
   "exports": {
     ".": "./dist/my-element.es.js"
@@ -12,27 +12,34 @@
     "types"
   ],
   "scripts": {
+    "domtest": "node ./src/domjs.js",
     "wca-analyze": "custom-elements-manifest analyze --config './wca-analyzer.config.mjs' --litelement",
-    "xoxo": "tsc ./src/test.ts --module es2020;  node ./src/test.js",
+    "xoxo": "npm install -D ts-node ./src/test.ts --module es2020;  node ./src/test.js",
     "dev": "vite",
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "lit": "^2.6.1"
+    "@types/jsdom": "^21.1.1",
+    "jsdom": "^21.1.1",
+    "lit": "^2.7.0"
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.6.8",
     "@custom-elements-manifest/find-dependencies": "^0.0.5",
     "@custom-elements-manifest/to-markdown": "^0.1.0",
     "@material/mwc-menu": "^0.27.0",
+    "@types/node": "^18.15.11",
     "custom-elements-manifest": "^2.0.0",
     "fs": "^0.0.1-security",
     "lit-analyzer": "^1.2.1",
+    "ts-node": "^10.9.1",
     "ts-simple-ast": "^21.0.4",
     "tsconfig-paths": "^3.14.2",
+    "tslib": "^2.5.0",
     "tsutils": "^3.21.0",
-    "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0",
+    "vite-plugin-dts": "^2.1.0"
   },
   "customElements": "custom-elements.json"
 }

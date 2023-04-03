@@ -11,7 +11,9 @@ const program = ts.createProgram([file], {
   allowJs: true,
   target: ts.ScriptTarget.ES2015,
   module: ts.ModuleKind.CommonJS,
+  allowSyntheticDefaultImports: true
 });
+
 const sourceFile = program.getSourceFile(file);
 const classDeclaration = sourceFile?.statements.find((statement) => {
   return ts.isClassDeclaration(statement);
@@ -211,6 +213,7 @@ if (!isHeritageClause || !programLength) {
   throw new Error("missing heritage clause or program length");
 }
 
+// @ts-ignore
 const heritageClassTypes = heritageClause?.types;
 
 const getTypeOfHeritageAtLocation = checker.getTypeAtLocation(
@@ -277,15 +280,71 @@ const heritageClauseProperties = getPropertiesOfTypeHeritage
     );
   });
 
+function findJsFileForDeclaration(declarationFile: string): string | null {
+  const jsFile = declarationFile.replace(/\.d\.ts$/, '.js');
+  if (ts.sys.fileExists(jsFile)) {
+    return jsFile;
+  }
+  return null;
+}
+
+function searchConstructorAssignedValuesinJsFile(name: string, node: any, sourceFile: any) {
+  const assignmentName = name;
+
+  const programJs = ts.createProgram([sourceFile], {
+    allowJs: true,
+    target: ts.ScriptTarget.ES2015,
+    module: ts.ModuleKind.CommonJS,
+    allowSyntheticDefaultImports: true
+  });
+
+  const sourceFileJs = programJs.getSourceFile(sourceFile);
+  const classDeclarationJs = sourceFileJs?.statements.find((statement) => {
+    return ts.isClassDeclaration(statement);
+  }) as ts.ClassDeclaration;
+
+  const constructorTestJs = classDeclarationJs.members.find((member) =>
+    ts.isConstructorDeclaration(member)
+  ) as ts.ConstructorDeclaration;
+
+  const testingStatements = constructorTestJs.body?.statements.filter((statement) => {
+    if (!ts.isExpressionStatement(statement) || !ts.isBinaryExpression(statement.expression)) return false;
+    const assignment = statement.expression;
+    return Boolean(ts.isPropertyAccessExpression(assignment?.left) && assignment?.left?.name?.text === assignmentName)
+  }) as ts.ExpressionStatement[];
+
+  if (!testingStatements.length) return;
+
+  const lastOfTestingStatements = testingStatements[testingStatements.length - 1];
+  const getValue = lastOfTestingStatements?.expression?.right;
+
+  const rightType = programJs.getTypeChecker().getTypeAtLocation(getValue);
+  //  const whatIsIt = getValue?.getTokenText();
+
+  return getValue?.text ?? rightType?.intrinsicName;
+};
+
 const constructHeritageMapping = (availableNodes: any) => {
   const buildJsonRefs = availableNodes.map((node: any) => {
     const nodeKind = ts.SyntaxKind[node.kind];
     const nodeText = node.getText();
     const name: string = node.name.getText() as string;
-
     const getSourceFile = node.getSourceFile();
     const getSourceFileName = getSourceFile.fileName;
     const isDeclarationFile = getSourceFile.isDeclarationFile;
+
+    if (isDeclarationFile) {
+      if (name == "innerAriaLabel" || name == "anchor" || name == "x" || name == "defaultFocus") {
+        const jsFile = findJsFileForDeclaration(getSourceFileName);
+
+        if (jsFile == null) return; /////// remove later 
+
+        // eventually load for once and cache
+        const getAssignedValueInConstructor = searchConstructorAssignedValuesinJsFile(name, node, jsFile);
+
+        let end; //// 
+      }
+    }
 
     return {
       name,
