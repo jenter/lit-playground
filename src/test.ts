@@ -198,6 +198,12 @@ const constuctJsonFromMembers = (availableNodes: any) => {
 const testingCurrentClassJSON = constuctJsonFromMembers(currentNodesToPrint);
 const jsonString = JSON.stringify(testingCurrentClassJSON, null, 2);
 
+////////////////////////////////////////////////////////////////////////
+
+/**
+
+FOR LATER ...... 
+
 // Write the string to a file
 fs.writeFileSync("src/test/currentClass.json", jsonString, {
   encoding: "utf8",
@@ -205,9 +211,13 @@ fs.writeFileSync("src/test/currentClass.json", jsonString, {
 
 console.log("🚀 completed JSON from current class 🚀");
 
+ */
+
+////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////
 // Heritage Class info /////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////// 
 
 if (!isHeritageClause || !programLength) {
   throw new Error("missing heritage clause or program length");
@@ -307,7 +317,11 @@ function searchConstructorAssignedValuesinJsFile(name: string, node: any, source
     ts.isConstructorDeclaration(member)
   ) as ts.ConstructorDeclaration;
 
-  const testingStatements = constructorTestJs.body?.statements.filter((statement) => {
+  const checkBodyStatements = constructorTestJs?.body?.statements;
+
+  if (!checkBodyStatements) return false;
+
+  const testingStatements = constructorTestJs?.body?.statements.filter((statement) => {
     if (!ts.isExpressionStatement(statement) || !ts.isBinaryExpression(statement.expression)) return false;
     const assignment = statement.expression;
     return Boolean(ts.isPropertyAccessExpression(assignment?.left) && assignment?.left?.name?.text === assignmentName)
@@ -316,11 +330,13 @@ function searchConstructorAssignedValuesinJsFile(name: string, node: any, source
   if (!testingStatements.length) return;
 
   const lastOfTestingStatements = testingStatements[testingStatements.length - 1];
+  // @ts-ignore
   const getValue = lastOfTestingStatements?.expression?.right;
 
   const rightType = programJs.getTypeChecker().getTypeAtLocation(getValue);
   //  const whatIsIt = getValue?.getTokenText();
 
+  // @ts-ignore
   return getValue?.text ?? rightType?.intrinsicName;
 };
 
@@ -333,23 +349,57 @@ const constructHeritageMapping = (availableNodes: any) => {
     const getSourceFileName = getSourceFile.fileName;
     const isDeclarationFile = getSourceFile.isDeclarationFile;
 
+    const lineStart = ts.getLineAndCharacterOfPosition(getSourceFile, node.getStart()).line - 1;
+
+    const lineOfCode = getSourceFile.text.split('\n')[lineStart].trim();
+
+
+    let comments = '';
+    if (node?.jsDoc) {
+      comments = node?.jsDoc[0]?.comment;
+    }
+
+    // check for // style comments 
+    if (lineOfCode.startsWith('//')) {
+      comments = lineOfCode.replace('//', '').trim();
+    }
+
+    console.log('🚀 ~ comments:', comments);
+
+    // const getFullText = getSourceFile.getFullText();
+    // const getNodeFullStart = node.getFullStart();
+    // const getNodeFullEnd = node.getFullEnd();
+    // const codeBlock = getSourceFile.getFullText().substring(getNodeFullStart, getNodeFullEnd);
+    // console.log('🚀 ~ file: test.ts:356 ~ buildJsonRefs ~ codeBlock:', codeBlock);
+
+    // const commentRanges = ts.getLeadingCommentRanges(
+    //   getFullText,
+    //   node.pos);
+
+
+    // const commentText = commentRanges?.map(comment => getSourceFile.getFullText().substring(comment.pos, comment.end)).join('\n');
+    // console.log('🚀 ~ file: test.ts:360 ~ buildJsonRefs ~ commentText:', commentText ? commentText[0] : 'e');
+
+    // const comments = ts.getLeadingCommentRanges(getSourceFile.getFullText(), dogHeadPropertyDeclarationNode.pos) || [];
+    // const commentText = comments.map(comment => sourceFile.getFullText().substring(comment.pos, comment.end)).join('\n');
+
+    let defaultValue = undefined;
+
     if (isDeclarationFile) {
-      if (name == "innerAriaLabel" || name == "anchor" || name == "x" || name == "defaultFocus") {
-        const jsFile = findJsFileForDeclaration(getSourceFileName);
+      // if (name == "innerAriaLabel" || name == "anchor" || name == "x" || name == "defaultFocus") { }
+      const jsFile = findJsFileForDeclaration(getSourceFileName);
+      if (jsFile == null) return; /////// remove later 
 
-        if (jsFile == null) return; /////// remove later 
-
-        // eventually load for once and cache
-        const getAssignedValueInConstructor = searchConstructorAssignedValuesinJsFile(name, node, jsFile);
-
-        let end; //// 
-      }
+      // eventually load for once and cache
+      const getAssignedValueInConstructor = searchConstructorAssignedValuesinJsFile(name, node, jsFile);
+      defaultValue = getAssignedValueInConstructor;
     }
 
     return {
       name,
       nodeKind,
       nodeText,
+      defaultValue,
       getSourceFileName,
       isDeclarationFile,
     };

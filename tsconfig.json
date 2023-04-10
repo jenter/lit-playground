@@ -3,6 +3,7 @@
     "baseUrl": "./",
     "rootDir": "./",
     "target": "ES2015",
+    // "removeComments": true,
     // "module": "commonjs",
     "module": "CommonJS",
     "strict": true,

@@ -22,14 +22,12 @@ export class DogElement extends AnimalElement {
   }
 
   render() {
-    const { animalHead, dogHead } = this;
-    console.log('🚀 ~ this:', this, this.corner);
+    const { dogHead } = this;
+    console.log('🚀 ~ this.corner:', this.corner);
 
     return html`
       <div>
-        <div>dogHead: ${dogHead}</div>
-        <div>animalhead: ${animalHead}</div>
-        dog render
+        <div>dogHead attribute: ${dogHead}</div>
       </div>
     `;
   }

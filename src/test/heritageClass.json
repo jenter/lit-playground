@@ -59,6 +59,7 @@
     "name": "anchor",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "anchor: HTMLElement | null;",
+    "defaultValue": "null",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -66,6 +67,7 @@
     "name": "open",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "open: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -73,6 +75,7 @@
     "name": "quick",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "quick: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -80,6 +83,7 @@
     "name": "wrapFocus",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "wrapFocus: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -87,6 +91,7 @@
     "name": "innerRole",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "innerRole: 'menu' | 'listbox';",
+    "defaultValue": "menu",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -94,6 +99,7 @@
     "name": "innerAriaLabel",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "innerAriaLabel: string | null;",
+    "defaultValue": "null",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -101,6 +107,7 @@
     "name": "corner",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "corner: Corner;",
+    "defaultValue": "TOP_START",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -108,6 +115,7 @@
     "name": "x",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "x: number | null;",
+    "defaultValue": "null",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -115,6 +123,7 @@
     "name": "y",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "y: number | null;",
+    "defaultValue": "null",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -122,6 +131,7 @@
     "name": "absolute",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "absolute: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -129,6 +139,7 @@
     "name": "multi",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "multi: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -136,6 +147,7 @@
     "name": "activatable",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "activatable: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -143,6 +155,7 @@
     "name": "fixed",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "fixed: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -150,6 +163,7 @@
     "name": "forceGroupSelection",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "forceGroupSelection: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -157,6 +171,7 @@
     "name": "fullwidth",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "fullwidth: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -164,6 +179,7 @@
     "name": "menuCorner",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "menuCorner: MenuCorner;",
+    "defaultValue": "START",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -171,6 +187,7 @@
     "name": "stayOpenOnBodyClick",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "stayOpenOnBodyClick: boolean;",
+    "defaultValue": "false",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -178,6 +195,7 @@
     "name": "defaultFocus",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "defaultFocus: DefaultFocusState;",
+    "defaultValue": "LIST_ROOT",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -227,6 +245,7 @@
     "name": "click",
     "nodeKind": "MethodDeclaration",
     "nodeText": "click(): void;",
+    "defaultValue": false,
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-base/base-element.d.ts",
     "isDeclarationFile": true
   }
