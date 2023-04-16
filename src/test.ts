@@ -234,6 +234,9 @@ const getPropertiesOfTypeHeritage = checker.getPropertiesOfType(
 );
 
 const excludedModifiers = ["private", "protected", "static", "readonly"];
+// here I get the whole big ole array of 400 things and can find source.... 
+///.... so I can make this into a scrubber..
+// so I need to just set it ffrom the @nodeModules location at the bottom
 
 const heritageClauseProperties = getPropertiesOfTypeHeritage
   .filter((property) => {
@@ -241,6 +244,18 @@ const heritageClauseProperties = getPropertiesOfTypeHeritage
     if (!declarations?.length) return false;
 
     const declarationInformation = declarations[0];
+
+
+    // here I just check for heritageClauses.. 
+    const aahasAHeritageClause = Boolean(declarationInformation?.parent?.heritageClauses);
+    const aaaHasThevAlue = property?.valueDeclaration;
+
+    if (aahasAHeritageClause && aaaHasThevAlue && aaaHasThevAlue.getSourceFile().fileName && aaaHasThevAlue.getSourceFile().fileName.includes('node_modules')) { // aahasAHeritageClause
+      const aaaaFindHeritageStuff = declarationInformation?.parent?.heritageClauses[0];
+      // const aaagetSourceFile = declarationInformation.getSourceFile();
+      const aaaaklll = aaaHasThevAlue.getSourceFile().fileName;
+      let hello;
+    }
 
     const getSourceFile = declarationInformation.getSourceFile();
     const getSourceFileName = getSourceFile.fileName;
@@ -272,11 +287,6 @@ const heritageClauseProperties = getPropertiesOfTypeHeritage
     });
 
     if (skipDueToModifier) return false;
-
-    // const testingName = property?.name;
-    // if (testingName == "aadifferentpropstyles" || testingName == "animalHead" || testingName == 'fireAnimalFunc' || testingName == "_listUpdateComplete" || testingName == "__childPart" || testingName == "mdcFoundationClass" || testingName == "renderOptions") {
-    //   console.log('e');
-    // }
 
     return true;
   })
@@ -341,6 +351,8 @@ function searchConstructorAssignedValuesinJsFile(name: string, node: any, source
 };
 
 const constructHeritageMapping = (availableNodes: any) => {
+  console.log('🚀 ~ file: test.ts:344 ~ constructHeritageMapping ~ availableNodes:', availableNodes);
+
   const buildJsonRefs = availableNodes.map((node: any) => {
     const nodeKind = ts.SyntaxKind[node.kind];
     const nodeText = node.getText();
@@ -363,25 +375,6 @@ const constructHeritageMapping = (availableNodes: any) => {
     if (lineOfCode.startsWith('//')) {
       comments = lineOfCode.replace('//', '').trim();
     }
-
-    console.log('🚀 ~ comments:', comments);
-
-    // const getFullText = getSourceFile.getFullText();
-    // const getNodeFullStart = node.getFullStart();
-    // const getNodeFullEnd = node.getFullEnd();
-    // const codeBlock = getSourceFile.getFullText().substring(getNodeFullStart, getNodeFullEnd);
-    // console.log('🚀 ~ file: test.ts:356 ~ buildJsonRefs ~ codeBlock:', codeBlock);
-
-    // const commentRanges = ts.getLeadingCommentRanges(
-    //   getFullText,
-    //   node.pos);
-
-
-    // const commentText = commentRanges?.map(comment => getSourceFile.getFullText().substring(comment.pos, comment.end)).join('\n');
-    // console.log('🚀 ~ file: test.ts:360 ~ buildJsonRefs ~ commentText:', commentText ? commentText[0] : 'e');
-
-    // const comments = ts.getLeadingCommentRanges(getSourceFile.getFullText(), dogHeadPropertyDeclarationNode.pos) || [];
-    // const commentText = comments.map(comment => sourceFile.getFullText().substring(comment.pos, comment.end)).join('\n');
 
     let defaultValue = undefined;
 
