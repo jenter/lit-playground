@@ -1,0 +1,544 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/animal-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "AnimalElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "animalHead",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "animal Head",
+              "attribute": "animal-head",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "isAnimal",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "true",
+              "description": "animal Head",
+              "attribute": "is-animal"
+            },
+            {
+              "kind": "method",
+              "name": "fireAnimalFunc",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "another",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "fire Animal Func"
+            },
+            {
+              "kind": "method",
+              "name": "fireOrganismFunc",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "isTrue",
+                  "default": "true",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "fire Organism Func",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "organismEar",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "attribute": "organism-ear",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "extraProperty",
+              "description": "Description of the extra property",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "animal-head",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "animal Head",
+              "fieldName": "animalHead"
+            },
+            {
+              "name": "is-animal",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "true",
+              "description": "animal Head",
+              "fieldName": "isAnimal"
+            },
+            {
+              "name": "organism-ear",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "fieldName": "organismEar",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "name": "extra-property",
+              "description": "Description of the extra attribute",
+              "fieldName": "extraProperty",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "OrganismElement",
+            "module": "/src/organism-element"
+          },
+          "tagName": "animal-element",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "AnimalElement",
+          "declaration": {
+            "name": "AnimalElement",
+            "module": "src/animal-element.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "animal-element",
+          "declaration": {
+            "name": "AnimalElement",
+            "module": "src/animal-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/dog-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "DogElement",
+          "members": [
+            {
+              "kind": "field",
+              "name": "dogHead",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"xooxox\"",
+              "description": "dog Head",
+              "attribute": "dog-head",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "fireDogFunc",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "hello",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "fire Dog Func"
+            },
+            {
+              "kind": "field",
+              "name": "animalHead",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "animal Head",
+              "attribute": "animal-head",
+              "reflects": true,
+              "inheritedFrom": {
+                "name": "AnimalElement",
+                "module": "src/animal-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "isAnimal",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "true",
+              "description": "animal Head",
+              "attribute": "is-animal",
+              "inheritedFrom": {
+                "name": "AnimalElement",
+                "module": "src/animal-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fireAnimalFunc",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "another",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "fire Animal Func",
+              "inheritedFrom": {
+                "name": "AnimalElement",
+                "module": "src/animal-element.ts"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "fireOrganismFunc",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "isTrue",
+                  "default": "true",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "fire Organism Func",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "organismEar",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "attribute": "organism-ear",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "extraProperty",
+              "description": "Description of the extra property",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "dog-head",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"xooxox\"",
+              "description": "dog Head",
+              "fieldName": "dogHead"
+            },
+            {
+              "name": "animal-head",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "animal Head",
+              "fieldName": "animalHead",
+              "inheritedFrom": {
+                "name": "AnimalElement",
+                "module": "src/animal-element.ts"
+              }
+            },
+            {
+              "name": "is-animal",
+              "type": {
+                "text": "Boolean"
+              },
+              "default": "true",
+              "description": "animal Head",
+              "fieldName": "isAnimal",
+              "inheritedFrom": {
+                "name": "AnimalElement",
+                "module": "src/animal-element.ts"
+              }
+            },
+            {
+              "name": "organism-ear",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "fieldName": "organismEar",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            },
+            {
+              "name": "extra-property",
+              "description": "Description of the extra attribute",
+              "fieldName": "extraProperty",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value",
+              "inheritedFrom": {
+                "name": "OrganismElement",
+                "module": "src/organism-element.ts"
+              }
+            }
+          ],
+          "superclass": {
+            "name": "AnimalElement",
+            "module": "/src/animal-element"
+          },
+          "tagName": "dog-element",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "DogElement",
+          "declaration": {
+            "name": "DogElement",
+            "module": "src/dog-element.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "dog-element",
+          "declaration": {
+            "name": "DogElement",
+            "module": "src/dog-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/domjs.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/organism-element.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "OrganismElement",
+          "members": [
+            {
+              "kind": "method",
+              "name": "fireOrganismFunc",
+              "privacy": "public",
+              "parameters": [
+                {
+                  "name": "isTrue",
+                  "default": "true",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ],
+              "description": "fire Organism Func"
+            },
+            {
+              "kind": "field",
+              "name": "organismEar",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "attribute": "organism-ear"
+            },
+            {
+              "kind": "field",
+              "name": "extraProperty",
+              "description": "Description of the extra property",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "organism-ear",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "description": "organism Ear",
+              "fieldName": "organismEar"
+            },
+            {
+              "name": "extra-property",
+              "description": "Description of the extra attribute",
+              "fieldName": "extraProperty",
+              "type": {
+                "text": "string"
+              },
+              "default": "default-value"
+            }
+          ],
+          "superclass": {
+            "name": "Menu",
+            "package": "@material/mwc-menu"
+          },
+          "tagName": "organism-element",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "OrganismElement",
+          "declaration": {
+            "name": "OrganismElement",
+            "module": "src/organism-element.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "organism-element",
+          "declaration": {
+            "name": "OrganismElement",
+            "module": "src/organism-element.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/test.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/lib/icon.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "Icon",
+          "members": [
+            {
+              "kind": "field",
+              "name": "iconPropFromLibIcon",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "attribute": "iconPropFromLibIcon"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "iconPropFromLibIcon",
+              "type": {
+                "text": "String"
+              },
+              "default": "\"\"",
+              "fieldName": "iconPropFromLibIcon"
+            }
+          ],
+          "superclass": {
+            "name": "LitElement",
+            "package": "lit"
+          },
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "Icon",
+          "declaration": {
+            "name": "Icon",
+            "module": "src/lib/icon.ts"
+          }
+        }
+      ]
+    }
+  ]
+}
