@@ -9,14 +9,14 @@ export class OrganismElement extends Menu {
   }
 
   /**
-   * fireOrganismFunc.......
+   * fire Organism Func
    */
-  private fireOrganismFunc() {
-    return "howdy";
+  public fireOrganismFunc(isTrue: boolean = true) {
+    return "test" + isTrue;
   }
 
   /**
-   * oranism live...
+   * organism Ear
    */
   @property({ attribute: "organism-ear" })
   organismEar: String = "";

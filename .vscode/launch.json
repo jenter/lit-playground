@@ -4,6 +4,16 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "WCAanalyzer",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "wca-analyze"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "mrTypescript",
       "program": "${workspaceFolder}/src/test.ts",
       "preLaunchTask": "tsc: build - tsconfig.json",

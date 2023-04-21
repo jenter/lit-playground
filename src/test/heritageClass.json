@@ -1,47 +1,5 @@
 [
   {
-    "name": "animalHead",
-    "nodeKind": "PropertyDeclaration",
-    "nodeText": "@property({ attribute: \"animal-head\" })\n  animalHead: String = \"\";",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
-    "isDeclarationFile": false
-  },
-  {
-    "name": "animalToes",
-    "nodeKind": "PropertyDeclaration",
-    "nodeText": "@property({ attribute: \"animal-toes\" })\n  animalToes: String = \"asdfasdfasdf\";",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
-    "isDeclarationFile": false
-  },
-  {
-    "name": "aadifferentpropstyles",
-    "nodeKind": "PropertyDeclaration",
-    "nodeText": "@property()\n  aadifferentpropstyles?: string = '';",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
-    "isDeclarationFile": false
-  },
-  {
-    "name": "isOpen",
-    "nodeKind": "PropertyDeclaration",
-    "nodeText": "@state()\n  isOpen = false;",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
-    "isDeclarationFile": false
-  },
-  {
-    "name": "render",
-    "nodeKind": "MethodDeclaration",
-    "nodeText": "render() {\n    const { animalHead } = this;\n\n    return html`\n      <div>\n        <div>animalhead: ${animalHead}</div>\n        animal render\n      </div>\n    `;\n  }",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/animal-element.ts",
-    "isDeclarationFile": false
-  },
-  {
-    "name": "organismEar",
-    "nodeKind": "PropertyDeclaration",
-    "nodeText": "@property({ attribute: \"organism-ear\" })\n  organismEar: String = \"\";",
-    "getSourceFileName": "/Users/jenter/Sites/lit-playground/src/organism-element.ts",
-    "isDeclarationFile": false
-  },
-  {
     "name": "mdcRoot",
     "nodeKind": "PropertyDeclaration",
     "nodeText": "mdcRoot: MenuSurface;",
@@ -200,9 +158,16 @@
     "isDeclarationFile": true
   },
   {
+    "name": "render",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "render(): import(\"lit-html\").TemplateResult<1>;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
     "name": "select",
     "nodeKind": "MethodDeclaration",
-    "nodeText": "select(index: MWCListIndex): void;",
+    "nodeText": "select(index: MWCListIndex, hamburgers: boolean): void;",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },
@@ -231,6 +196,13 @@
     "name": "focusItemAtIndex",
     "nodeKind": "MethodDeclaration",
     "nodeText": "focusItemAtIndex(index: number): void;",
+    "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "isDeclarationFile": true
+  },
+  {
+    "name": "getUpdateCompleteeeeee",
+    "nodeKind": "MethodDeclaration",
+    "nodeText": "getUpdateCompleteeeeee(index: number);",
     "getSourceFileName": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
     "isDeclarationFile": true
   },

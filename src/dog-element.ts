@@ -9,21 +9,20 @@ export class DogElement extends AnimalElement {
   }
 
   /**
-   * dogHead...
+   * dog Head
    */
   @property({ attribute: "dog-head", reflect: true })
   dogHead: String = "xooxox";
 
   /**
-   * fireDogFunc.......
+   * fire Dog Func
    */
-  private fireDogFunc() {
-    return "howdy";
+  public fireDogFunc(hello: string) {
+    return "test" + hello;
   }
 
   render() {
     const { dogHead } = this;
-    console.log('🚀 ~ this.corner:', this.corner);
 
     return html`
       <div>

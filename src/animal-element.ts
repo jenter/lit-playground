@@ -9,28 +9,23 @@ export class AnimalElement extends OrganismElement {
   }
 
   /**
-  * animalHead is may comment 
-  * this is more text 
-  */
+   * animal Head
+   */
   @property({ attribute: "animal-head", reflect: true })
   animalHead: String = "";
 
-  // weinerzzzz
-  @property({ attribute: "weiner", reflect: true })
-  weiner: String = "";
+  /**
+   * animal Head
+   */
+  @property({ attribute: "is-animal" })
+  isAnimal: Boolean = true;
 
-  private fireAnimalFunc() {
-    return "hello";
+  /**
+   * fire Animal Func
+   */
+  private fireAnimalFunc(another: string) {
+    return "hello" + another;
   }
-
-  @property({ attribute: "animal-toes" })
-  animalToes: String = "asdfasdfasdf";
-
-  @property()
-  aadifferentpropstyles?: string = '';
-
-  @state()
-  isOpen = false;
 
   render() {
     const { animalHead } = this;
