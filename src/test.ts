@@ -203,6 +203,8 @@ console.log("🚀 completed JSON from current class 🚀");
 // Heritage Class info /////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
+// start here  ~  ~ ~ ~
+
 const excludedModifiers = ["private", "protected", "static", "readonly"];
 
 /**

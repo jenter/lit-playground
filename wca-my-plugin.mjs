@@ -81,6 +81,8 @@ export function traverseExternal(externalPackageName = false) {
           (declaration) => declaration.kind === "class" && declaration.name === node.name.getText()
         );
 
+        // https://chat.openai.com/c/b9351739-2010-48c7-b64b-a646cd62e68f
+        // next I pass the path in the utility functions and return info with
         const classModuleDocPath = moduleDoc.path;
 
         // - - - - - - -
