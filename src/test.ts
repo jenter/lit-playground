@@ -308,10 +308,10 @@ const getSymbolMethodInfo = (symbol: ts.Symbol) => {
 
   const getMethodParameters = getSymbolValueDeclaration?.parameters
     ? getSymbolValueDeclaration.parameters
-        .map((parameter: any) => {
-          return parameter.getText();
-        })
-        .join(", ")
+      .map((parameter: any) => {
+        return parameter.getText();
+      })
+      .join(", ")
     : "";
 
   const methodData = {
@@ -403,14 +403,24 @@ const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true)
 
   const jsReferenceValue = queryConstructorAssignedValuesinJsFile(symbol.getName(), symbol, jsSiblingCompiled);
 
+  ///// YOU CAN GET IT ... 
+  /**
+   * __decorate([
+      property({ type: Boolean, reflect: true })
+  ], MenuBase.prototype, "open", void 0);
+   */
+
   const propertyData = {
     name: symbol.getName(),
     type: typeToString,
-    value: jsReferenceValue ?? undefined
+    default: jsReferenceValue ?? undefined,
+    sourceFile: propertySourceFile?.fileName ?? undefined
   };
 
   return propertyData;
 };
+
+// @property({type: Boolean, reflect: true}) open = false;\n\n
 
 const getNativeTypeFromSymbolObject = (symbol: ts.Symbol) => {
   if (!symbol?.declarations) {
@@ -421,9 +431,19 @@ const getNativeTypeFromSymbolObject = (symbol: ts.Symbol) => {
   return isProperty ? "property" : "method";
 };
 
-const AAAAAAAAAAAA_Two = getSymbolPropertyInfo(externalPackageProperties[10]);
+const AAAAAAAAAAAA_Two = getSymbolPropertyInfo(externalPackageProperties[3]);
 
 let success; ///
+
+const Ineed = {
+  "kind": "field",
+  "name": "",
+  "description": "",
+  "type": { "text": "" },
+  "default": "",
+  "attribute": "animal-head",
+  "reflects": "???"
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -439,7 +459,6 @@ let success; ///
 
 // const aaaapropertyTypeString = checker.typeToString(propertyType);
 
-let x;
 
 /////
 

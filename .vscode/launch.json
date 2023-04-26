@@ -21,16 +21,16 @@
       "smartStep": true,
       "internalConsoleOptions": "openOnSessionStart",
       "outFiles": ["${workspaceFolder}/dist/**/*.js"]
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "DebugXXXBbuild",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run-script", "build"],
-      "console": "integratedTerminal",
-      "skipFiles": ["<node_internals>/**"],
-      "sourceMaps": true
     }
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "DebugXXXBbuild",
+    //   "runtimeExecutable": "npm",
+    //   "runtimeArgs": ["run-script", "build"],
+    //   "console": "integratedTerminal",
+    //   "skipFiles": ["<node_internals>/**"],
+    //   "sourceMaps": true
+    // }
   ]
 }
