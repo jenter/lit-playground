@@ -191,6 +191,7 @@ const getSymbolMethodInfo = (symbol: ts.Symbol) => {
     : "";
 
   const methodData = {
+    field: "method",
     name: symbol.getName(),
     parameters: getMethodParameters,
     returnType: returnTypeText ?? "void"
@@ -368,6 +369,7 @@ const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true)
   // const getType = availablePropertiesAsDecorated?.filter((property) => property.name === "type").map((property) => property.value)[0];
 
   const propertyData = {
+    field: "property",
     name: symbol.getName(),
     type: typeToString,
     default: jsReferenceValue ?? undefined,

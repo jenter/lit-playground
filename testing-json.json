@@ -1,5 +1,6 @@
 [
   {
+    "field": "property",
     "name": "corner",
     "type": "\"TOP_LEFT\" | \"TOP_RIGHT\" | \"BOTTOM_LEFT\" | \"BOTTOM_RIGHT\" | \"TOP_START\" | \"TOP_END\" | \"BOTTOM_START\" | \"BOTTOM_END\"",
     "default": "'TOP_START'",
@@ -12,6 +13,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "menuCorner",
     "type": "\"START\" | \"END\"",
     "default": "'START'",
@@ -24,6 +26,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "open",
     "type": "boolean",
     "default": "false",
@@ -40,6 +43,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "quick",
     "type": "boolean",
     "default": "false",
@@ -52,6 +56,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "wrapFocus",
     "type": "boolean",
     "default": "false",
@@ -64,6 +69,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "innerRole",
     "type": "\"menu\" | \"listbox\"",
     "default": "'menu'",
@@ -76,6 +82,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "innerAriaLabel",
     "type": "string",
     "default": "null",
@@ -88,6 +95,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "x",
     "type": "number",
     "default": "null",
@@ -100,6 +108,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "y",
     "type": "number",
     "default": "null",
@@ -112,6 +121,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "absolute",
     "type": "boolean",
     "default": "false",
@@ -124,6 +134,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "multi",
     "type": "boolean",
     "default": "false",
@@ -136,6 +147,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "activatable",
     "type": "boolean",
     "default": "false",
@@ -148,6 +160,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "fixed",
     "type": "boolean",
     "default": "false",
@@ -160,6 +173,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "forceGroupSelection",
     "type": "boolean",
     "default": "false",
@@ -172,6 +186,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "fullwidth",
     "type": "boolean",
     "default": "false",
@@ -184,6 +199,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "stayOpenOnBodyClick",
     "type": "boolean",
     "default": "false",
@@ -196,6 +212,7 @@
     ]
   },
   {
+    "field": "property",
     "name": "defaultFocus",
     "type": "\"NONE\" | \"LIST_ROOT\" | \"FIRST_ITEM\" | \"LAST_ITEM\"",
     "default": "'LIST_ROOT'",
@@ -208,41 +225,49 @@
     ]
   },
   {
+    "field": "method",
     "name": "render",
     "parameters": "",
     "returnType": " import(\"lit-html\").TemplateResult<1>"
   },
   {
+    "field": "method",
     "name": "select",
     "parameters": "index: MWCListIndex",
     "returnType": " void"
   },
   {
+    "field": "method",
     "name": "close",
     "parameters": "",
     "returnType": " void"
   },
   {
+    "field": "method",
     "name": "show",
     "parameters": "",
     "returnType": " void"
   },
   {
+    "field": "method",
     "name": "getFocusedItemIndex",
     "parameters": "",
     "returnType": " number"
   },
   {
+    "field": "method",
     "name": "focusItemAtIndex",
     "parameters": "index: number",
     "returnType": " void"
   },
   {
+    "field": "method",
     "name": "layout",
     "parameters": "updateItems?: boolean",
     "returnType": " void"
   },
   {
+    "field": "method",
     "name": "click",
     "parameters": "",
     "returnType": " void"
