@@ -266,6 +266,10 @@ const getHeritageClauseMappedProperties = (heritageClause: ts.HeritageClause, mo
     // skip due to modifiers for private, readonly, etc.
     const hasModifiers = Boolean(ts.canHaveModifiers(PropertyDeclarations));
 
+    // if (property.escapedName == "open") {
+    //   let xoxox;
+    // }
+
     if (hasModifiers && skipUnusableProperties) {
       const modifiers = ts.getModifiers(PropertyDeclarations);
       const textValuesIdentifiers = modifiers?.map((modifier) => {
@@ -308,10 +312,10 @@ const getSymbolMethodInfo = (symbol: ts.Symbol) => {
 
   const getMethodParameters = getSymbolValueDeclaration?.parameters
     ? getSymbolValueDeclaration.parameters
-      .map((parameter: any) => {
-        return parameter.getText();
-      })
-      .join(", ")
+        .map((parameter: any) => {
+          return parameter.getText();
+        })
+        .join(", ")
     : "";
 
   const methodData = {
@@ -331,18 +335,10 @@ function findJsMappingForDeclaration(declarationFile: string): string | null {
   return null;
 }
 
-function queryConstructorAssignedValuesinJsFile(name: string, node: any, sourceFile: any) {
+function queryConstructorAssignedValuesinJsFile(name: string, node: any, sourceFileJs: any) {
   const assignmentName = name;
 
-  const programJs = ts.createProgram([sourceFile], {
-    allowJs: true,
-    target: ts.ScriptTarget.ES2015,
-    module: ts.ModuleKind.CommonJS,
-    allowSyntheticDefaultImports: true
-  });
-
-  const sourceFileJs = programJs.getSourceFile(sourceFile);
-  const classDeclarationJs = sourceFileJs?.statements.find((statement) => {
+  const classDeclarationJs = sourceFileJs?.statements.find((statement: ts.Statement) => {
     return ts.isClassDeclaration(statement);
   }) as ts.ClassDeclaration;
 
@@ -380,6 +376,52 @@ function queryConstructorAssignedValuesinJsFile(name: string, node: any, sourceF
   return AssignedValue ?? undefined;
 }
 
+function queryDecorateExpressionFromJsFile(name: string, sourceFileJs: any) {
+  const nodeChildren = sourceFileJs?.statements;
+  if (!nodeChildren.length) return false;
+
+  const filterSomeByExpressionName = nodeChildren.filter((node: ts.Node) => {
+    if (!ts.isExpressionStatement(node)) return false;
+
+    let expression = node?.expression as ts.CallExpression;
+    const expressionSub = expression?.expression as ts.Expression;
+    const validateExpression = expressionSub?.getText(sourceFileJs);
+    if (validateExpression !== "__decorate") return false;
+
+    const argumentMatchByName = expression?.arguments?.some((argument: any) => {
+      const getText = argument?.text == name;
+      return getText;
+    });
+
+    if (!argumentMatchByName) return false;
+
+    const confirmExpressionAssignment = expression?.arguments[0] as any;
+    const validateExpressionAsProperty = confirmExpressionAssignment?.elements[0].expression.getText(sourceFileJs);
+
+    return validateExpressionAsProperty == "property";
+  });
+
+  if (!filterSomeByExpressionName || !filterSomeByExpressionName[0]) return false;
+
+  return filterSomeByExpressionName[0]?.expression?.arguments ?? undefined;
+}
+
+const constructProgramForJsFile = (sourceFile: any) => {
+  const programJs = ts.createProgram([sourceFile], {
+    allowJs: true,
+    target: ts.ScriptTarget.ES2015,
+    module: ts.ModuleKind.CommonJS,
+    allowSyntheticDefaultImports: true
+  });
+
+  if (!programJs.getSourceFile(sourceFile)) {
+    console.error(`Unable to find source file ${sourceFile}`);
+    return;
+  }
+
+  return programJs.getSourceFile(sourceFile);
+};
+
 const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true) => {
   // const getSymbolsDeclaration = symbol?.declarations[0];
   const getSymbolsDeclaration = symbol.declarations as ts.DeclarationStatement[];
@@ -401,9 +443,31 @@ const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true)
     return undefined;
   }
 
-  const jsReferenceValue = queryConstructorAssignedValuesinJsFile(symbol.getName(), symbol, jsSiblingCompiled);
+  const programJsFile = constructProgramForJsFile(jsSiblingCompiled);
 
-  ///// YOU CAN GET IT ... 
+  const jsReferenceValue = queryConstructorAssignedValuesinJsFile(symbol.getName(), symbol, programJsFile);
+
+  const getDecorateValues = queryDecorateExpressionFromJsFile(symbol.getName(), programJsFile);
+
+  const getPropertyValuesFromDecorate = (decorateValues: any) => {
+    const getDecorateValues = decorateValues;
+    const getPropertyAssignment = getDecorateValues[0].elements[0]?.arguments[0] as ts.ObjectLiteralExpression;
+    if (!getPropertyAssignment?.properties) return undefined;
+
+    const mapProperties = getPropertyAssignment?.properties?.map((property: any) => {
+      const name = property?.name?.escapedText;
+      const value = property?.initializer?.getText(programJsFile);
+      return { name, value };
+    });
+
+    return mapProperties;
+  };
+
+  const availablePropertiesAsDecorated = getPropertyValuesFromDecorate(getDecorateValues);
+
+  const getType = availablePropertiesAsDecorated?.filter((property) => property.name === "type").map((property) => property.value)[0];
+
+  ///// YOU CAN GET IT ...
   /**
    * __decorate([
       property({ type: Boolean, reflect: true })
@@ -412,9 +476,10 @@ const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true)
 
   const propertyData = {
     name: symbol.getName(),
-    type: typeToString,
+    type: getType ?? typeToString,
     default: jsReferenceValue ?? undefined,
-    sourceFile: propertySourceFile?.fileName ?? undefined
+    sourceFile: propertySourceFile?.fileName ?? undefined,
+    propertyDecorators: availablePropertiesAsDecorated ?? undefined
   };
 
   return propertyData;
@@ -431,18 +496,19 @@ const getNativeTypeFromSymbolObject = (symbol: ts.Symbol) => {
   return isProperty ? "property" : "method";
 };
 
-const AAAAAAAAAAAA_Two = getSymbolPropertyInfo(externalPackageProperties[3]);
+// const AAAAAAAAAAAA_Two = getSymbolPropertyInfo(externalPackageProperties[3]);
+const AAAAAAAAAAAA_Two = getSymbolPropertyInfo(externalPackageProperties[19]);
 
-let success; ///
+let success; /////////////////////////////////////////////////////////////////////
 
 const Ineed = {
-  "kind": "field",
-  "name": "",
-  "description": "",
-  "type": { "text": "" },
-  "default": "",
-  "attribute": "animal-head",
-  "reflects": "???"
+  kind: "field",
+  name: "",
+  description: "",
+  type: { text: "" },
+  default: "",
+  attribute: "animal-head",
+  reflects: "???"
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -458,7 +524,6 @@ const Ineed = {
 //   externalPackageProperties[6].declarations[0].initializer?.getText();
 
 // const aaaapropertyTypeString = checker.typeToString(propertyType);
-
 
 /////
 

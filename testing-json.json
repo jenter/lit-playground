@@ -1,0 +1,250 @@
+[
+  {
+    "name": "corner",
+    "type": "\"TOP_LEFT\" | \"TOP_RIGHT\" | \"BOTTOM_LEFT\" | \"BOTTOM_RIGHT\" | \"TOP_START\" | \"TOP_END\" | \"BOTTOM_START\" | \"BOTTOM_END\"",
+    "default": "'TOP_START'",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "String"
+      }
+    ]
+  },
+  {
+    "name": "menuCorner",
+    "type": "\"START\" | \"END\"",
+    "default": "'START'",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "String"
+      }
+    ]
+  },
+  {
+    "name": "open",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      },
+      {
+        "name": "reflect",
+        "value": "true"
+      }
+    ]
+  },
+  {
+    "name": "quick",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "wrapFocus",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "innerRole",
+    "type": "\"menu\" | \"listbox\"",
+    "default": "'menu'",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "String"
+      }
+    ]
+  },
+  {
+    "name": "innerAriaLabel",
+    "type": "string",
+    "default": "null",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "String"
+      }
+    ]
+  },
+  {
+    "name": "x",
+    "type": "number",
+    "default": "null",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Number"
+      }
+    ]
+  },
+  {
+    "name": "y",
+    "type": "number",
+    "default": "null",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Number"
+      }
+    ]
+  },
+  {
+    "name": "absolute",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "multi",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "activatable",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "fixed",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "forceGroupSelection",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "fullwidth",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "stayOpenOnBodyClick",
+    "type": "boolean",
+    "default": "false",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "Boolean"
+      }
+    ]
+  },
+  {
+    "name": "defaultFocus",
+    "type": "\"NONE\" | \"LIST_ROOT\" | \"FIRST_ITEM\" | \"LAST_ITEM\"",
+    "default": "'LIST_ROOT'",
+    "sourceFile": "/Users/jenter/Sites/lit-playground/node_modules/@material/mwc-menu/mwc-menu-base.d.ts",
+    "propertyDecorators": [
+      {
+        "name": "type",
+        "value": "String"
+      }
+    ]
+  },
+  {
+    "name": "render",
+    "parameters": "",
+    "returnType": " import(\"lit-html\").TemplateResult<1>"
+  },
+  {
+    "name": "select",
+    "parameters": "index: MWCListIndex",
+    "returnType": " void"
+  },
+  {
+    "name": "close",
+    "parameters": "",
+    "returnType": " void"
+  },
+  {
+    "name": "show",
+    "parameters": "",
+    "returnType": " void"
+  },
+  {
+    "name": "getFocusedItemIndex",
+    "parameters": "",
+    "returnType": " number"
+  },
+  {
+    "name": "focusItemAtIndex",
+    "parameters": "index: number",
+    "returnType": " void"
+  },
+  {
+    "name": "layout",
+    "parameters": "updateItems?: boolean",
+    "returnType": " void"
+  },
+  {
+    "name": "click",
+    "parameters": "",
+    "returnType": " void"
+  }
+]
