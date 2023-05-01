@@ -6,6 +6,7 @@ let heritageClause: ts.HeritageClause | undefined = undefined;
 let program;
 let classDeclaration;
 let checker: any;
+let jsSiblingCompiledCached: any | undefined;
 
 export function retrieveExternalHeritageInfo(file: string, externalPackageNamespace: string) {
   const programInitialized = tsProgramInit(file);
@@ -277,6 +278,25 @@ function queryDecorateExpressionFromJsFile(name: string, sourceFileJs: any) {
   return filterSomeByExpressionName[0]?.expression?.arguments ?? undefined;
 }
 
+/**
+ * I want to cache this and not recreate it.
+ */
+function checkForCachedAstFile(fileReference: string) {
+  if (!jsSiblingCompiledCached) {
+    console.log("assigned jsSiblingCompiledCached", fileReference);
+    jsSiblingCompiledCached = constructProgramForJsFile(fileReference);
+    return jsSiblingCompiledCached;
+  }
+
+  if (jsSiblingCompiledCached?.fileName == fileReference) {
+    console.log("assigned jsSiblingCompiledCached", jsSiblingCompiledCached?.fileName);
+    return jsSiblingCompiledCached;
+  }
+
+  console.log("new file ref", fileReference);
+  return constructProgramForJsFile(fileReference);
+}
+
 const constructProgramForJsFile = (sourceFile: any) => {
   const programJs = ts.createProgram([sourceFile], {
     allowJs: true,
@@ -306,26 +326,26 @@ const getSymbolPropertyInfo = (symbol: ts.Symbol, jsFileMapping: boolean = true)
   // without passing in undefined, ts.TypeFormatFlags.InTypeAlias
   const typeToString = checker.typeToString(getSymbolType, undefined, ts.TypeFormatFlags.InTypeAlias);
 
-  console.log("🚀 ~ typeToString:", typeof typeToString);
-
   // since *.d.ts files are not available, we need to traverse the js
   const propertySourceFile = getSymbolValueDeclaration?.getSourceFile();
   const isDeclarationFile = propertySourceFile.isDeclarationFile;
 
-  const jsSiblingCompiled = findJsMappingForDeclaration(propertySourceFile?.fileName);
+  const jsSiblingFileReference = findJsMappingForDeclaration(propertySourceFile?.fileName);
 
-  if (jsFileMapping && Boolean(!jsSiblingCompiled || !isDeclarationFile)) {
+  if (jsFileMapping && Boolean(!jsSiblingFileReference || !isDeclarationFile)) {
     console.error("no js sibling found for", symbol.getName());
     return undefined;
   }
 
-  const programJsFile = constructProgramForJsFile(jsSiblingCompiled);
+  if (!jsSiblingFileReference) {
+    throw new Error("missing jsSiblingFileReference");
+  }
 
+  const programJsFile = checkForCachedAstFile(jsSiblingFileReference);
   const jsReferenceValue = queryConstructorAssignedValuesinJsFile(symbol.getName(), symbol, programJsFile);
 
   if (!jsReferenceValue) {
-    ///////
-    return;
+    throw new Error("missing jsReferenceValue");
   }
 
   const getDecorateValues = queryDecorateExpressionFromJsFile(symbol.getName(), programJsFile);
